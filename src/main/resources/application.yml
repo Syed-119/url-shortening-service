@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: mysql://localhost:3300/mydb
+    username: root
+    password: Jipnp-112@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+
+
+
+
+
+
+
+
+
+
