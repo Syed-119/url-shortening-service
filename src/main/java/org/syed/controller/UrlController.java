@@ -13,10 +13,6 @@ public class UrlController {
     @Autowired
     UrlService urlService;
 
-    @GetMapping
-    public Response findByShortUrl(@RequestParam("shortUrl") String shortUrl) {
-        return urlService.getOriginalUrl(shortUrl);
-    }
 
     @PostMapping
     public Response saveShortUrl(@RequestBody Request request){

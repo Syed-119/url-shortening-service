@@ -6,8 +6,5 @@ import org.syed.data.entity.Response;
 
 public interface UrlRepository extends JpaRepository<Response,Long> {
 
-    Response findByShortUrl(String shortUrl);
-
-    Response saveShortUrl(Request request);
 
 }

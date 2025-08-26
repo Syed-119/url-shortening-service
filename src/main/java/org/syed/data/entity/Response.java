@@ -17,11 +17,15 @@ public class Response {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "url", unique = true)
     private String url;
 
+    @Column(name = "shortCode")
     private String shortCode;
 
+    @Column(name = "createdAt")
     private Date createdAt;
 
+    @Column(name = "updatedAt")
     private Date updatedAt;
 }
