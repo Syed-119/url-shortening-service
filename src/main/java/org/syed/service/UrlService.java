@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.syed.data.entity.Request;
 import org.syed.data.entity.Response;
 import org.syed.repository.UrlRepository;
+import org.syed.utils.ServiceUtil;
 
 import java.util.Date;
+
 
 @Service
 public class UrlService {
@@ -15,13 +17,15 @@ public class UrlService {
     private UrlRepository urlRepository;
 
     public Response saveShortUrl(Request request){
+        String uniqueShortCode = ServiceUtil.generatingShortCodeUrl();
         Response response = new Response();
         response.setUrl(request.getUrl());
-        response.setShortCode(request.getUrl());
+        response.setShortCode(uniqueShortCode);
         response.setCreatedAt(new Date());
         response.setUpdatedAt(new Date());
         urlRepository.save(response);
         return response;
     }
+
 
 }
