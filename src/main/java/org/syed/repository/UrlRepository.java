@@ -6,5 +6,7 @@ import org.syed.data.entity.Response;
 
 public interface UrlRepository extends JpaRepository<Response,Long> {
 
+    public Response findByShortCode(String shortCode);
+
 
 }
