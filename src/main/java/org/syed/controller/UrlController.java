@@ -1,6 +1,8 @@
 package org.syed.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.syed.data.entity.Request;
 import org.syed.data.entity.Response;
@@ -15,7 +17,18 @@ public class UrlController {
 
 
     @PostMapping
-    public Response saveShortUrl(@RequestBody Request request){
-        return urlService.saveShortUrl(request);
+    public ResponseEntity<Response> saveShortUrl(@RequestBody Request request){
+        if (request!= null){
+            return new ResponseEntity<Response>(urlService.saveShortUrl(request),HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{shortCode}")
+    public ResponseEntity<Response> getOriginalUrl(@PathVariable(value = "shortCode", required = false) String shortCode){
+        if (urlService.getOriginalUrl(shortCode) != null){
+            return new ResponseEntity<Response>(urlService.getOriginalUrl(shortCode), HttpStatus.FOUND);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }

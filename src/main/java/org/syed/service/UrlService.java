@@ -27,5 +27,9 @@ public class UrlService {
         return response;
     }
 
+    public Response getOriginalUrl(String shortCode){
+        return urlRepository.findByShortCode(shortCode);
+    }
+
 
 }
