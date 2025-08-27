@@ -31,5 +31,24 @@ public class UrlService {
         return urlRepository.findByShortCode(shortCode);
     }
 
+    public Response updateOriginalUrl(String shortCode, Request request){
+        Response response = urlRepository.findByShortCode(shortCode);
+        if (response != null) {
+            response.setUpdatedAt(new Date());
+            response.setUrl(request.getUrl());
+            urlRepository.save(response);
+            return response;
+        }
+        return null;
+    }
+
+    public Boolean deleteShortUrl(String shortCode){
+        Response response = urlRepository.findByShortCode(shortCode);
+        if (response != null) {
+            urlRepository.delete(response);
+            return true;
+        }
+        return false;
+    }
 
 }
