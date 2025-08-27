@@ -42,4 +42,13 @@ public class UrlService {
         return null;
     }
 
+    public Boolean deleteShortUrl(String shortCode){
+        Response response = urlRepository.findByShortCode(shortCode);
+        if (response != null) {
+            urlRepository.delete(response);
+            return true;
+        }
+        return false;
+    }
+
 }

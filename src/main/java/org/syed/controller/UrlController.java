@@ -19,7 +19,7 @@ public class UrlController {
     @PostMapping
     public ResponseEntity<Response> saveShortUrl(@RequestBody Request request){
         if (request!= null){
-            return new ResponseEntity<Response>(urlService.saveShortUrl(request),HttpStatus.CREATED);
+            return new ResponseEntity<>(urlService.saveShortUrl(request),HttpStatus.CREATED);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
@@ -27,7 +27,7 @@ public class UrlController {
     @GetMapping("/{shortCode}")
     public ResponseEntity<Response> getOriginalUrl(@PathVariable(value = "shortCode", required = false) String shortCode){
         if (urlService.getOriginalUrl(shortCode) != null){
-            return new ResponseEntity<Response>(urlService.getOriginalUrl(shortCode), HttpStatus.FOUND);
+            return new ResponseEntity<>(urlService.getOriginalUrl(shortCode), HttpStatus.FOUND);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
@@ -38,6 +38,14 @@ public class UrlController {
             return new ResponseEntity<>(urlService.updateOriginalUrl(shortCode, request), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/{shortCode}")
+    public ResponseEntity deleteOriginalUrl(@PathVariable(value = "shortCode", required = false) String shortCode){
+        if (urlService.deleteShortUrl(shortCode)){
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
 }
