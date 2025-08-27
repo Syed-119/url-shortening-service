@@ -34,6 +34,10 @@ public class UrlController {
 
     @PutMapping("/{shortCode}")
     public ResponseEntity<Response> updateOriginalUrl(@PathVariable(value = "shortCode", required = false) String shortCode, @RequestBody Request request){
-        updateOriginalUrl(shortCode, request);
+        if (urlService.updateOriginalUrl(shortCode, request) != null){
+            return new ResponseEntity<>(urlService.updateOriginalUrl(shortCode, request), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+
 }
