@@ -28,4 +28,7 @@ public class Response {
 
     @Column(name = "updatedAt")
     private Date updatedAt;
+
+    @Column(name = "showStats")
+    private Integer showStats;
 }

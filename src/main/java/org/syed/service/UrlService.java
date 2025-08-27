@@ -23,12 +23,20 @@ public class UrlService {
         response.setShortCode(uniqueShortCode);
         response.setCreatedAt(new Date());
         response.setUpdatedAt(new Date());
+        response.setShowStats(0);
         urlRepository.save(response);
-        return response;
+        Response response2 = response;
+        response2.setShowStats(null);
+        return response2;
     }
 
     public Response getOriginalUrl(String shortCode){
-        return urlRepository.findByShortCode(shortCode);
+        Response response = urlRepository.findByShortCode(shortCode);
+        response.setShowStats(response.getShowStats() + 1);
+        urlRepository.save(response);
+        Response response2 = response;
+        response2.setShowStats(null);
+        return response2;
     }
 
     public Response updateOriginalUrl(String shortCode, Request request){
@@ -37,7 +45,9 @@ public class UrlService {
             response.setUpdatedAt(new Date());
             response.setUrl(request.getUrl());
             urlRepository.save(response);
-            return response;
+            Response response2 = response;
+            response2.setShowStats(null);
+            return response2;
         }
         return null;
     }
@@ -50,5 +60,11 @@ public class UrlService {
         }
         return false;
     }
+
+    public Response getUrlStats(String shortCode){
+        return urlRepository.findByShortCode(shortCode);
+    }
+
+
 
 }
