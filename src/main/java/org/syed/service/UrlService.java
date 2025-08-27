@@ -31,5 +31,18 @@ public class UrlService {
         return urlRepository.findByShortCode(shortCode);
     }
 
+    public void updateOriginalUrl(String shortCode, Request request){
+        String uniqueShortCode = ServiceUtil.generatingShortCodeUrl();
+        for (Response response : urlRepository.findAll()) {
+            if(response.getShortCode().equals(shortCode)){
+                response.setUpdatedAt(new Date());
+                response.setUrl(request.getUrl());
+                response.setShortCode(uniqueShortCode);
+            }
+
+        }
+
+    }
+
 
 }
